@@ -56,6 +56,19 @@ class Salary{
         })
         console.log(data);
     }
+    deletePay(req,res){
+        const qry = `
+        DELETE FROM Salary
+        WHERE staffNo = ${req.params.id};
+        `
+        db.query(qry, (err)=>{
+            if(err) throw err 
+            res.json({
+                status: res.statusCode, 
+                msg: "The salary information has been deleted." 
+    })
+})
+    }
 }
 
 

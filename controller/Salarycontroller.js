@@ -1,64 +1,63 @@
 import express from "express";
-import bodyParser from "body-parser";
-import { days } from "../model/model.js";
-const leaveRouter = express.Router()
+import { pay } from "../model/model.js";
+const payRouter = express.Router()
 // fetch leave days
-leaveRouter.get('/', (req, res)=>{
+payRouter.get('/', (req, res)=>{
     try {
-        days.fetchDays(req,res)
+        pay.fetchSalary(req,res)
     } catch (e) {
         res.json({
             status: statusCode,
-            msg: 'Failed to retrieve leave day'
+            msg: 'Failed to retrieve salary'
 
         })
     }
 })
 // add a leave day
-leaveRouter.get('/:id', (req, res)=>{
+payRouter.get('/:id', (req, res)=>{
     try {
-        days.fetchDay(req, res)
+        pay.fetchpay(req, res)
     } catch (error) {
         res.json({
             status: res.statusCode,
-            msg: 'Failed to retrieve a leave day.'
+            msg: 'Failed to retrieve a salary information.'
 
         })
     }
 })
-leaveRouter.post('/addLeave', bodyParser.json(), (req,res)=>{
+payRouter.post('/addpay', (req,res)=>{
     try {
-        days.addleave(req, res)
+        pay.newSalary(req, res)
     } catch (error) {
         res.json({
 
 
             status: res.statusCode,
-            msg: 'Failed to add a leave day'
+            msg: 'Failed to add a amount'
         })
     }
 })
-leaveRouter.patch('/update',bodyParser.json(),
+payRouter.patch('/update',
 (req,res)=>{
     try {
-        days.updateLeave(req, res)
+        pay.updateSalary(req, res)
     } catch (error) {
         res.json({
             status: res.statusCode,
-            msg: "Could not update leave days"
+            msg: "Could not update salary"
         })
     }
 })
-productRouter.delete('/delete/:id', (req, res)=>{
+payRouter.delete('/delete/:id', (req, res)=>{
     try{
-        products.deleteProduct(req, res)
+        pay.deletePay(req, res)
     }catch(e) {
         res.json({
             status: res.statusCode,
-            msg: "Failed to delete a product."
+            msg: "Failed to delete a amount"
         })
     }
 })
 export{
-    leaveRouter
+    payRouter
 }
