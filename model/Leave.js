@@ -53,7 +53,7 @@ class Leave{
             if(err) throw err
             res.json({
                 status: res.statusCode,
-                msg: 'leave  was updated'
+                msg: 'leave was updated'
             })
         })
         console.log(data);
@@ -67,7 +67,9 @@ class Leave{
             if(err) throw err 
             res.json({
                 status: res.statusCode, 
-                msg: "The product information has been deleted." 
+                msg: "The leave information has been deleted." 
+    })
+})
     }
 }
 

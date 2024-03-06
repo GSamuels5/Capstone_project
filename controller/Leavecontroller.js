@@ -49,9 +49,9 @@ leaveRouter.patch('/update',
         })
     }
 })
-workRouter.delete('/delProduct', (req, res)=>{
+leaveRouter.delete('/removeLeave', (req, res)=>{
     try {
-        product.delProduct(req, res);
+        product.deleteLeave(req, res);
     } catch(e) {
         console.log(e);
         res.json({
