@@ -1,0 +1,64 @@
+import { connection as db } from "../config/database.js";
+
+
+class Salary{
+    fetchSalary(req, res){
+        const qry = `Select salaryID,
+        amount,
+        staffNo
+        from Salary;`
+        db.query(qry, (err, results)=>{
+            if(err) throw err 
+            res.json({
+                status: res.statusCode,
+                results
+            })
+        })
+    }
+    // Salary by FK
+    fetchpay(req,res){
+        const qry = `
+        Select salaryID,
+        amount,
+        staffNo
+        from Salary
+        where staffNo = "${req.params.id}";`
+        db.query(qry,(err, results)=>{
+            if(err) throw err
+            res.json({
+                status: res.statusCode,
+                results: results[0]
+            })
+        })
+        console.log(req.body);
+    }
+ newSalary(req,res){
+        const qry = `
+        insert into Salary set ?;`
+        db.query(qry,[req.body] ,(err)=>{
+            if(err) throw err
+            res.json({
+                status: res.statusCode,
+                msg: 'new salary added'
+            })
+        })
+    }
+    updateSalary(req,res){
+        let data = req.body;
+        const qry = `
+        update Salary set ? where staffNo = "${req.params.id}"; `
+        db.query(qry,[req.body] ,(err)=>{
+            if(err) throw err
+            res.json({
+                status: res.statusCode,
+                msg: 'salary was updated'
+            })
+        })
+        console.log(data);
+    }
+}
+
+
+export {
+Salary
+}
