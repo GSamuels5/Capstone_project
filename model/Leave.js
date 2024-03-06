@@ -1,72 +1,77 @@
 import { connection as db } from "../config/database.js";
 
-class Employees{
-    // fetch employee by id
-    fetchEmployee(req,res){
-        let id = req.params.id;
-        const qry = `select * from Employees where staffNo= ${id}`
-        db.query(qry, (err, result)=>{
-            if(err) throw err;
+
+class Leave{
+    fetchDays(req, res){
+        const qry = `Select LeaveID,
+        staffNo,
+        leaveDays,
+        leaveReason
+        from Leavedays;`
+        db.query(qry, (err, results)=>{
+            if(err) throw err 
             res.json({
                 status: res.statusCode,
-                result
+                results
             })
         })
     }
+    // leave days by PK
+    fetchDay(req,res){
+        const qry = `
+        Select LeaveID,
+        staffNo,
+        leaveDays,
+        leaveReason
+        from Leavedays
+        where staffNo = "${req.params.id}";`
+        db.query(qry,(err, results)=>{
+            if(err) throw err
+            res.json({
+                status: res.statusCode,
+                results: results[0]
+            })
+        })
+        console.log(req.body);
+    }
+ addleave(req,res){
+        const qry = `
+        insert into Leavedays set ?;`
+        db.query(qry,[req.body] ,(err)=>{
+            if(err) throw err
+            res.json({
+                status: res.statusCode,
+                msg: 'leave day added'
+            })
+        })
+    }
+    updateLeave(req,res){
+        let data = req.body;
+        const qry = `
+        update Leavedays set ? where staffNo = "${req.params.id}"; `
+        db.query(qry,[req.body] ,(err)=>{
+            if(err) throw err
+            res.json({
+                status: res.statusCode,
+                msg: 'leave  was updated'
+            })
+        })
+        console.log(data);
+    }
+    deleteLeave(req,res){
+        const qry = `
+        DELETE FROM Leavedays
+        WHERE staffNo = ${req.params.id};
+        `
+        db.query(qry, (err)=>{
+            if(err) throw err 
+            res.json({
+                status: res.statusCode, 
+                msg: "The product information has been deleted." 
+    }
 }
-}
-fetchProducts(req, res){
-const qry = `SELECT * FROM Products;`;
 
-db.query(qry, (err, result)=>{
-    if(err) throw err;
-    res.json({
-        status: res.statusCode,
-        result
-    })
-})
-}
-newProduct(req, res){
-let data = req.body;
-
-const qry = `INSERT INTO Products SET ?`
-
-db.query(qry, [data], (err)=>{
-    if(err) throw err;
-    res.json({
-        status: res.statusCode,
-        msg: "Added new product"
-    })
-})
-}
-deleteProduct(req, res){
-let id = req.params.id;
-
-const qry = `DELETE FROM Products WHERE prodID = ${id};`;
-
-db.query(qry, (err)=>{
-    if(err) throw err
-    res.json({
-        status: res.statusCode,
-        msg: "Product removed"
-    })
-})
-}
-updateProduct(req, res){
-let data = req.body;
-
-const qry = `UPDATE Products SET ?;`;
-
-db.query(qry, [data], (err)=>{
-    if(err) throw err;
-    res.json({
-        status: res.statusCode,
-        msg: "Product updated"
-    })
-})
-}
-}
 
 export {
-Product
+Leave
 }
