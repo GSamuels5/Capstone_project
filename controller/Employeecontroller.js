@@ -1,11 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
 import {workers} from '../model/model.js'
-import { verifyToken } from "../middleware/AuthenticationUser.js";
+import { verifyToken } from "../middleware/Authentication.js";
 
 const workRouter = express.Router()
 // fetch users
-workRouter.get('/',(req,res )=> {
+workRouter.get('/',verifyToken,(req,res )=> {
     try {
         workers.fetchEmployees(req,res)
     } catch (e) {
