@@ -5,7 +5,7 @@ import { verifyToken } from "../middleware/Authentication.js";
 
 const workRouter = express.Router()
 // fetch users
-workRouter.get('/',verifyToken,(req,res )=> {
+workRouter.get('/', (req,res )=> {
     try {
         workers.fetchEmployees(req,res)
     } catch (e) {
@@ -17,6 +17,7 @@ workRouter.get('/',verifyToken,(req,res )=> {
         
     }
 })
+// fetch user by ID
 workRouter.get('/:id',(req, res)=> {
     try {
         workers.fetchEmployee(req,res)
@@ -77,16 +78,16 @@ workRouter.post('/login', bodyParser.json(), (req,res)=>
         })
     }
 })
-workRouter.post('/signUp', bodyParser.json(),(req,res)=>{
-    try {
-        workers.signUp(req,res)
-    } catch (e) {
-res.json({
-    status: statusCode,
-    msg: "Failed to sign-up"
-})
-    }
-})
+// workRouter.post('/signUp', bodyParser.json(),(req,res)=>{
+//     try {
+//         workers.signUp(req,res)
+//     } catch (e) {
+// res.json({
+//     status: statusCode,
+//     msg: "Failed to sign-up"
+// })
+//     }
+// })
 export{
     workRouter,
     express

@@ -2,7 +2,7 @@ import express from "express";
 import { pay } from "../model/model.js";
 import { verifyToken } from "../middleware/Authentication.js";
 const payRouter = express.Router()
-// fetch leave days
+// fetch salary table
 payRouter.get('/',verifyToken, (req, res)=>{
     try {
         pay.fetchSalary(req,res)
@@ -26,7 +26,8 @@ payRouter.get('/:id', (req, res)=>{
         })
     }
 })
-payRouter.post('/addpay', (req,res)=>{
+// add salary
+payRouter.post('/addpay/:id', (req,res)=>{
     try {
         pay.newSalary(req, res)
     } catch (error) {
@@ -38,7 +39,7 @@ payRouter.post('/addpay', (req,res)=>{
         })
     }
 })
-payRouter.patch('/update',
+payRouter.patch('/update/:id',
 (req,res)=>{
     try {
         pay.updateSalary(req, res)
