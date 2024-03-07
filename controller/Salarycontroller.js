@@ -1,8 +1,9 @@
 import express from "express";
 import { pay } from "../model/model.js";
+import { verifyToken } from "../middleware/Authentication.js";
 const payRouter = express.Router()
 // fetch leave days
-payRouter.get('/', (req, res)=>{
+payRouter.get('/',verifyToken, (req, res)=>{
     try {
         pay.fetchSalary(req,res)
     } catch (e) {

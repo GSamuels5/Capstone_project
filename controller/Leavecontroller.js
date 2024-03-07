@@ -1,9 +1,11 @@
 import express from "express";
 import { days } from "../model/model.js";
 import { workRouter } from "./Employeecontroller.js";
+import { verifyToken } from "../middleware/Authentication.js";
+import bodyParser from "body-parser";
 const leaveRouter = express.Router()
 // fetch leave days
-leaveRouter.get('/', (req, res)=>{
+leaveRouter.get('/',verifyToken, (req, res)=>{
     try {
         days.fetchDays(req,res)
     } catch (e) {
@@ -26,7 +28,7 @@ leaveRouter.get('/:id', (req, res)=>{
         })
     }
 })
-leaveRouter.post('/addLeave',  (req,res)=>{
+leaveRouter.post('/addLeave',bodyParser.json(),  (req,res)=>{
     try {
         days.addleave(req, res)
     } catch (error) {
@@ -38,7 +40,7 @@ leaveRouter.post('/addLeave',  (req,res)=>{
         })
     }
 })
-leaveRouter.patch('/update',
+leaveRouter.patch('/update/:id',bodyParser.json(),
 (req,res)=>{
     try {
         days.updateLeave(req, res)
@@ -49,7 +51,7 @@ leaveRouter.patch('/update',
         })
     }
 })
-leaveRouter.delete('/removeLeave', (req, res)=>{
+leaveRouter.delete('/delete/:id', (req, res)=>{
     try {
         product.deleteLeave(req, res);
     } catch(e) {

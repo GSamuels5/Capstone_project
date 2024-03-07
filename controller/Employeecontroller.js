@@ -54,7 +54,7 @@ workRouter.patch('/update/:id',bodyParser.json(), (req,res)=>{
     }
 })
 // delete user 
-workRouter.delete('/delete/:id', bodyParser.json(), (req,res)=>{
+workRouter.delete('/delete/:id',  (req,res)=>{
     try {
         workers.deleteEmployee(req,res)
         
