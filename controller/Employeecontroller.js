@@ -30,7 +30,7 @@ workRouter.get('/:id',(req, res)=> {
     }
 })
 // add a new user
-workRouter.post('/signup',bodyParser.json(), (req, res)=>{
+workRouter.post('/register',bodyParser.json(), (req, res)=>{
     try{
         workers.hireEmployee(req, res)
 
@@ -75,6 +75,16 @@ workRouter.post('/login', bodyParser.json(), (req,res)=>
             status: res.statusCode,
             msg: "Failed to log in"
         })
+    }
+})
+workRouter.post('/signUp', bodyParser.json(),(req,res)=>{
+    try {
+        workers.signUp(req,res)
+    } catch (e) {
+res.json({
+    status: statusCode,
+    msg: "Failed to sign-up"
+})
     }
 })
 export{
