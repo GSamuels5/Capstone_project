@@ -1,11 +1,13 @@
 import express from "express";
 import { pay } from "../model/model.js";
-import { verifyToken } from "../middleware/Authentication.js";
+import bodyParser from "body-parser";
+
 const payRouter = express.Router()
 // fetch salary table
-payRouter.get('/',verifyToken, (req, res)=>{
+payRouter.get('/', (req, res)=>{
     try {
         pay.fetchSalary(req,res)
+        
     } catch (e) {
         res.json({
             status: statusCode,
@@ -30,6 +32,7 @@ payRouter.get('/:id', (req, res)=>{
 payRouter.post('/addpay/:id', (req,res)=>{
     try {
         pay.newSalary(req, res)
+        console.log(pay.newSalary(req, res))
     } catch (error) {
         res.json({
 

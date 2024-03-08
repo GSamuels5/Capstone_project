@@ -78,16 +78,7 @@ workRouter.post('/login', bodyParser.json(), (req,res)=>
         })
     }
 })
-// workRouter.post('/signUp', bodyParser.json(),(req,res)=>{
-//     try {
-//         workers.signUp(req,res)
-//     } catch (e) {
-// res.json({
-//     status: statusCode,
-//     msg: "Failed to sign-up"
-// })
-//     }
-// })
+
 export{
     workRouter,
     express

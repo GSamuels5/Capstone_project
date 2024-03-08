@@ -3,16 +3,16 @@ import { connection as db } from "../config/database.js";
 
 class Salary{
     fetchSalary(req, res){
-        const qry = `Select salaryID,
-        amount,
-        staffNo
+        const qry = `select *
         from Salary;`
+        
         db.query(qry, (err, results)=>{
             if(err) throw err 
             res.json({
                 status: res.statusCode,
-                results
+                results,
             })
+            
         })
     }
     // Salary by FK
@@ -35,11 +35,13 @@ class Salary{
  newSalary(req,res){
         const qry = `
         insert into Salary set ?;`
+        
         db.query(qry,[req.body] ,(err)=>{
             if(err) throw err
-            res.json({
+           return res.json({
                 status: res.statusCode,
                 msg: 'new salary added'
+              
             })
         })
     }
