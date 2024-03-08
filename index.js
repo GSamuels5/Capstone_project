@@ -32,8 +32,8 @@ app.get('/', (req, res)=>{
     res.status(200).sendFile('/static/index.html');
 })
 app.use('/workers', workRouter)
-app.use('/leave', leaveRouter)
 app.use('/salary', payRouter)
+app.use('/leave', leaveRouter)
 app.use(errorHandling)
 app.listen(port,()=>{
     console.log(`Server is running on port: http://localhost:${port}`)
