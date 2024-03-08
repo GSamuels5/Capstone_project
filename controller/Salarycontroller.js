@@ -29,16 +29,13 @@ payRouter.get('/:id', (req, res)=>{
     }
 })
 // add salary
-payRouter.post('/addpay/:id', (req,res)=>{
+payRouter.post('/addpay', (req,res)=>{
     try {
         pay.newSalary(req, res)
-        console.log(pay.newSalary(req, res))
-    } catch (error) {
+    } catch (err) {
         res.json({
-
-
             status: res.statusCode,
-            msg: 'Failed to add a amount'
+            msg: 'Failed to add an amount'
         })
     }
 })

@@ -30,13 +30,13 @@ class Salary{
                 results: results[0]
             })
         })
-        console.log(req.body);
     }
  newSalary(req,res){
         const qry = `
         insert into Salary set ?;`
         
         db.query(qry,[req.body] ,(err)=>{
+            console.log(req.body);
             if(err) throw err
            return res.json({
                 status: res.statusCode,
