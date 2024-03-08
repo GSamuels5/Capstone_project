@@ -4,11 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capstone backend</title>
+    <link rel="stylesheet" href="./CSS/style.css">
 </head>
 <body>
     <table>
-        <thead>im head</thead>
-        <tbody>im body</tbody>
+        <caption>
+            <h3>
+                Routes information
+            </h3>
+        </caption>
+        <thead>
+            <th>Routes</th>
+            <th>HTTP methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/</td>
+                <td>GET</td>
+                <td>Render an index.html</td>
+            </tr>
+            <tr>
+                <td colspan="3">Other routes are protected by middleware. You must login first.</td>
+            </tr>
+        </tbody>
     </table>
+    <table>
+        <caption>
+            <h3>
+                all users routes information
+            </h3>
+        </caption>
+        <thead>
+            <th>Routes</th>
+            <th>HTTP methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/</td>
+                <td>GET</td>
+                <td>fetch all users</td>
+            </tr>
+            <tr>
+                <td>/:id</td>
+                <td>GET</td>
+                <td>fetch user by ID</td>
+            </tr>
+            <tr>
+                <td>/update/:id</td>
+                <td>PATCH</td>
+                <td>update a user</td>
+            </tr>
+            <tr>
+                <td>/register</td>
+                <td>POST</td>
+                <td>To add a new user</td>
+            </tr>
+            <tr>
+                <td>/delete/:id</td>
+                <td>DELETE</td>
+                <td>To delete a user</td>
+            </tr>
+            <tr>
+
+                <td>/login</td>
+                <td>POST</td>
+                <td>To login a user</td>
+            </tr>
+            <!-- <tr>
+                <td>/signUp</td>
+                <td>POST</td>
+                <td>To sign up a new user</td>
+            </tr> -->
+            
+        </tbody>
+    </table>
+  
+    <table>
+        <caption>
+            <h3>
+        leave router
+            </h3>
+        </caption>
+        <thead>
+            <th>Routes</th>
+            <th>HTTP methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/</td>
+                <td>GET</td>
+                <td>To get all leaves</td>
+            </tr>
+            <tr>
+                <td>/:id</td>
+                <td>GET</td>
+                <td>To get leave days by ID</td>
+            </tr>
+            <tr>
+                <td>/addLeave</td>
+                <td>POST</td>
+                <td>To add a leave day</td>
+            </tr>
+            <tr>
+                <td>'/update/:id</td>
+                <td>PATCH</td>
+                <td>To update a leave day</td>
+            </tr>
+            <tr>
+                <td>/delete/:id</td>
+                <td>DELETE</td>
+                <td>To delete a leave day</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <table>
+        <caption>
+            <h3>
+                Salary router
+            </h3>
+        </caption>
+        <thead>
+            <th>Routes</th>
+            <th>HTTP methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/</td>
+                <td>GET</td>
+                <td>fetch user salary</td>
+            </tr>
+            <tr>
+                <td>/:id</td>
+                <td>GET</td>
+                <td>fetch user salary by id</td>
+            </tr>
+            <tr>
+                <td>/addpay/:id</td>
+                <td>POST</td>
+                <td>add user salary</td>
+            </tr>
+            <tr>
+                <td>/update/:id</td>
+                <td>PATCH</td>
+                <td>to update user salary</td>
+            </tr>
+            <tr>
+                <td>/delete/:id</td>
+                <td>DELETE</td>
+                <td>to delete user salary</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+
 </body>
 </html>

@@ -15,6 +15,7 @@ fetchEmployees(req, res){
             status: res.statusCode,
             result
         })
+        console.log(err);
     })
     }
 
@@ -34,14 +35,14 @@ fetchEmployees(req, res){
 async hireEmployee(req, res){
     // Payload
 let data = req.body;
-data.userPwd = await hash(data?.userPwd, 8)
+data.empPwd = await hash(data.empPwd, 8)
 let user = {
     empEmail: data.empEmail,
     empPwd: data.empPwd
 }
 
-const qry = `INSERT INTO Employees SET ?`
-
+const qry = `INSERT INTO Employees SET ?;`
+console.log(data);
 db.query(qry, [data], (err)=>{
     if(err){
         res.json({
@@ -64,7 +65,7 @@ db.query(qry, [data], (err)=>{
 }
 async updateEmployee(req, res){
     let data = req.body;
-    data.userPwd = await hash(data?.userPwd, 8)
+    data.empPwd = await hash(data?.empPwd, 8)
     
     const qry = `UPDATE Employees SET ? Where staffNo =${req.params.id};`;
     let user = {
@@ -93,7 +94,7 @@ async updateEmployee(req, res){
 deleteEmployee(req, res){
 let data = req.body;
 
-const qry = `DELETE FROM Employess WHERE staffNo = ${req.params.id};`;
+const qry = `DELETE FROM Employees WHERE staffNo = ${req.params.id};`;
 
 db.query(qry,[data], (err)=>{
     if(err) throw err
@@ -141,41 +142,41 @@ msg: 'You provided a wrong email address.'
         }
     })
 }
-async signUp(req, res){
-    try {
-        const {empEmail,empPwd}= req.body
-        // check if user exist in database
-        const existing =`select from Employees where empEmai=?;`;
-        db.query(existing, [empEmail], async (err,existingUser)=>{
-            if(err){
-                throw err;
-            }
-            if(existingUser.length > 0){
-                return res.status(400).json({msg: "Email already exist"})
-            }
-            // hash the password
-            const hashPWd = await hash(empPwd, 8);
-            // insert new user into database
-            const newUser = `into into Employees(empEmail, empPwd) values (?,?);`;
-            db.query(newUser, [empEmail, hashPWd], (err, result)=>{
-                if(err){
-                    throw err
-                }
-                const user = {empEmail, empPwd: hashPWd}
-                const token = createToken(user)
+// async signUp(req, res){
+//     try {
+//         const {empEmail,empPwd}= req.body
+//         // check if user exist in database
+//         const existing =`select from Employees where empEmai=?;`;
+//         db.query(existing, [empEmail], async (err,existingUser)=>{
+//             if(err){
+//                 throw err;
+//             }
+//             if(existingUser.length > 0){
+//                 return res.status(400).json({msg: "Email already exist"})
+//             }
+//             // hash the password
+//             const hashPWd = await hash(empPwd, 8);
+//             // insert new user into database
+//             const newUser = `into into Employees(empEmail, empPwd) values (?,?);`;
+//             db.query(newUser, [empEmail, hashPWd], (err, result)=>{
+//                 if(err){
+//                     throw err
+//                 }
+//                 const user = {empEmail, empPwd: hashPWd}
+//                 const token = createToken(user)
 
-                res.json({
-                    status: res.statusCode,
-                    token,
-                    msg: "Account created succesfully"
-                })
-            })
-        })
+//                 res.json({
+//                     status: res.statusCode,
+//                     token,
+//                     msg: "Account created succesfully"
+//                 })
+//             })
+//         })
 
-    } catch (err) {
-        res.status(500).json({msg:"Internal server error"})
-    }
-}
+//     } catch (err) {
+//         res.status(500).json({msg:"Internal server error"})
+//     }
+// }
 }
 
 
