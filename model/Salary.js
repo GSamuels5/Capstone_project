@@ -23,6 +23,7 @@ class Salary{
         staffNo
         from Salary
         where staffNo = "${req.params.id}";`
+        console.log(req.params.id);
         db.query(qry,(err, results)=>{
             if(err) throw err
             res.json({
@@ -47,8 +48,10 @@ class Salary{
     }
     updateSalary(req,res){
         let data = req.body;
+        console.log(data);
         const qry = `
         update Salary set ? where staffNo = "${req.params.id}"; `
+        console.log(req.params.id);
         db.query(qry,[req.body] ,(err)=>{
             if(err) throw err
             res.json({
