@@ -5,7 +5,7 @@ import { verifyToken } from "../middleware/Authentication.js";
 import bodyParser from "body-parser";
 const leaveRouter = express.Router()
 // fetch leave days
-leaveRouter.get('/',verifyToken, (req, res)=>{
+leaveRouter.get('/',(req, res)=>{
     try {
         days.fetchDays(req,res)
     } catch (e) {
@@ -53,9 +53,8 @@ leaveRouter.patch('/update/:id',bodyParser.json(),
 })
 leaveRouter.delete('/delete/:id', (req, res)=>{
     try {
-        product.deleteLeave(req, res);
+        days.deleteLeave(req, res);
     } catch(e) {
-        console.log(e);
         res.json({
             status: res.statusCode,
             msg: "Could not remove leave day"
