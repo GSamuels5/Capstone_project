@@ -1,9 +1,9 @@
 <template>
   <div>
     <NavBar />
-    <main class="container-fluid">
-
-    <router-view />
+    <main class="container-fluid" @routeChangeStart="startSpinner" @routeChangeEnd="stopSpinner" >
+<router-view />
+     <Spinner v-if="showSpinner"/>
     </main>
     <Footer/>
   </div>
