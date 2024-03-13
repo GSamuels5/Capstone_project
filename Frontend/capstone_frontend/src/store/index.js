@@ -106,10 +106,321 @@ export default createStore({
           title: "Error",
           text: "Could not update user",
           icon: "error",
+          timer:2000
+        })
+      }
+    },
+    async deleteEmployee(context, payload){
+      try {
+        await fetch(`${Urldata}/workers/delete/${payload}`,{
+          method: "DELETE"
+        })
+        sweet({
+          title: "User deleted",
+          text: "User deleted succesfully",
+          icon: "success",
+          timer:2000
+        })
+        context.dispatch('fetchEmployees')
+      } catch (e) {
+        sweet({
+          title: "Error",
+          text:"Couldn't delete user",
           timer: 2000
         })
       }
+    },
+    async hireEmployee(context, payload){
+      try {
+        let  result = await fetch(`${Urldata}/workers/register`,{
+          method: "POST",
+          headers:{
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        })
+        let data = await result.json()
+        console.log(data);
+        if(+data.status >= 400){
+          sweet({
+            title: "Error",
+            text: "Could not create a user",
+            icon: "error",
+            timer: 2000
+          })
+          context.dispatch("fetchEmployees")
+        }
+      } catch (e) {
+        console.log(e);
+        sweet({
+          title: "Error",
+          text: "Could not create a user",
+          icon: "error",
+          timer: 2000
+        })
+        
+      }
+    },
+    async login(context, payload){
+      try {
+        const{msg,token, result} = (await fetch.post(`${Urldata}/workers/login`,payload)).data
+        if (result) {
+          context.commit("setWorker",{
+            msg,
+            result
+          })
+          cookies.set("Worker",{
+
+            msg,
+            token,
+            result
+          }
+          )
+          sweet({
+            title: msg,
+            text: `Welcome back,  
+            ${result?.firstName} ${result?.lastName}
+            `,
+            icon: "success",
+            timer: 2000
+          })
+          router.push({
+            name: "/login"
+          })
+        }else{
+          sweet({
+            title: "info",
+            text:msg,
+            icon:"info",
+            timer: 2000
+          })
+        }
+
+        
+      } catch (e) {
+        sweet({
+          title: "Error",
+          text: 'Failed to login.',
+          icon:'error',
+          timer: 2000
+        })
+      }
+
+    },
+    async fetchDays(context){
+      try {
+      let result = await fetch(`${Urldata}/leave`) 
+      let data = await result.json()
+      context.commit("setDays",data.result) 
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async fetchDay(context,payload){
+      try {
+        let result = await fetch(`${Urldata}/leave/${payload.id}`)
+        let data = await result.json()
+        if(result){
+          context.commit("setDay", result)
+        }else{
+          sweet({
+            title: "Retrieving a a leave day",
+            text: "No leave available",
+            icon: "info",
+            timer: 2000
+          })
+        }
+      } catch (e) {
+        
+          sweet({
+            title: "Error",
+            text: "leave day could not be accessed",
+            icon: "error",
+            timer: 2000
+
+          })
+        }},
+        async addleave(context, payload){
+          try {
+            let result = await fetch(`${Urldata}/leave/addleave`,{
+              method: "POST",
+              headers:{
+                "Content-Type":"applicaation/json"
+              },
+              body: JSON.stringify(payload)
+            })
+            let data = await result.json()
+            console.log('ad', data)
+            context.dispatch("fetchDays");
+          } catch (e) {
+            console.log(e);
+            sweet({
+              title:'Error',
+              text: 'Failed to add a leave day',
+              icon: 'error',
+              timer: 2000
+            })
+            
+          }
+        },
+        async updateLeave(context, payload){
+try {
+  let result = await fetch(`${Urldata}/leave/update/${payload.staffNo}`,{
+    method: "PATCH",
+    headers:{
+      "Content-Type":"application/json"
+   },
+   body: JSON.stringify(payload)
+  })
+  let data = await result.json()
+  console.log(data);
+  context.dispatch('fetchDays')
+  sweet({
+    title:'leave day changed',
+    text: 'leave day updated',
+    icon: 'successs',
+    timer: 2000
+  })
+} catch (e) {
+  sweet({
+    title: 'Error',
+    text: "Could not update leave",
+    icon: 'error',
+    timer:2000
+  })
+}
+        },
+        async deleteLeave(context, payload){
+          try {
+            let result = await fetch(`${Urldata}/leave/delete/${payload}`,{
+              method: "DELETE"
+            })
+            let data = await result.json()
+            console.log(data);
+            context.dispatch('fetchDays')
+            sweet({
+              title: "Leave day was deleted",
+              text: "leave removed succesfully",
+              icon: "success",
+              timer: 2000
+            })
+          } catch (e) {
+            sweet({
+              title: "Error",
+              text: "Error occured while trying to delete leave",
+              icon: "error",
+              timer: 2000
+            })
+          }
+          setDays(context,payload){
+            context.commit('setDays', payload)
+          }
+        },
+        async fetchDay(context,payload){
+          try {
+            let result = await fetch(`${Urldata}/leave/${payload.id}`)
+            let data = await result.json()
+            if(result){
+              context.commit("setDay", result)
+            }else{
+              sweet({
+                title: "Retrieving a a leave day",
+                text: "No leave available",
+                icon: "info",
+                timer: 2000
+              })
+            }
+          } catch (e) {
+            
+              sweet({
+                title: "Error",
+                text: "leave day could not be accessed",
+                icon: "error",
+                timer: 2000
+    
+              })
+            }},
+            async addleave(context, payload){
+              try {
+                let result = await fetch(`${Urldata}/leave/addleave`,{
+                  method: "POST",
+                  headers:{
+                    "Content-Type":"applicaation/json"
+                  },
+                  body: JSON.stringify(payload)
+                })
+                let data = await result.json()
+                console.log('ad', data)
+                context.dispatch("fetchDays");
+              } catch (e) {
+                console.log(e);
+                sweet({
+                  title:'Error',
+                  text: 'Failed to add a leave day',
+                  icon: 'error',
+                  timer: 2000
+                })
+                
+              }
+            },
+            async updateLeave(context, payload){
+    try {
+      let result = await fetch(`${Urldata}/leave/update/${payload.staffNo}`,{
+        method: "PATCH",
+        headers:{
+          "Content-Type":"application/json"
+       },
+       body: JSON.stringify(payload)
+      })
+      let data = await result.json()
+      console.log(data);
+      context.dispatch('fetchDays')
+      sweet({
+        title:'leave day changed',
+        text: 'leave day updated',
+        icon: 'successs',
+        timer: 2000
+      })
+    } catch (e) {
+      sweet({
+        title: 'Error',
+        text: "Could not update leave",
+        icon: 'error',
+        timer:2000
+      })
     }
+            },
+            async deleteLeave(context, payload){
+              try {
+                let result = await fetch(`${Urldata}/leave/delete/${payload}`,{
+                  method: "DELETE"
+                })
+                let data = await result.json()
+                console.log(data);
+                context.dispatch('fetchDays')
+                sweet({
+                  title: "Leave day was deleted",
+                  text: "leave removed succesfully",
+                  icon: "success",
+                  timer: 2000
+                })
+              } catch (e) {
+                sweet({
+                  title: "Error",
+                  text: "Error occured while trying to delete leave",
+                  icon: "error",
+                  timer: 2000
+                })
+              }
+              setDays(context,payload){
+                context.commit('setDays', payload)
+              }
+            }
+        
+        
+        
+      
+    
   },
   modules: {
   }
