@@ -7,6 +7,7 @@ const cookies = useCookies()
 
 import router from '@/router/index.js'
 const Urldata = 'https://capstone-project-1hsh.onrender.com'
+
 export default createStore({
   state: {
 
@@ -220,8 +221,8 @@ export default createStore({
       try {
         let result = await fetch(`${Urldata}/leave/${payload.id}`)
         let data = await result.json()
-        if(result){
-          context.commit("setDay", result)
+        if(data){
+          context.commit("setDay", data)
         }else{
           sweet({
             title: "Retrieving a a leave day",
@@ -312,9 +313,9 @@ try {
               timer: 2000
             })
           }
-          setDays(context,payload){
+         
             context.commit('setDays', payload)
-          }
+          
         },  
         // fetching salary table 
          async fetchSalary(context){
@@ -330,8 +331,8 @@ try {
           try {
             let result = await fetch(`${Urldata}/salary/${payload.id}`)
             let data = await result.json()
-            if(result){
-              context.commit("setPaid", result)
+            if(data){
+              context.commit("setPaid", data)
             }else{
               sweet({
                 title: "Retrieving your salary",
@@ -422,9 +423,8 @@ try {
                   timer: 2000
                 })
               }
-              setDays(context,payload){
+            
                 context.commit('setPay', payload)
-              }
             }
         
         

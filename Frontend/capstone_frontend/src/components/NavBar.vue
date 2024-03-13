@@ -29,7 +29,7 @@
             >
           </li>
           <li class="nav-item">
-            <router-link to="/admin" class="nav-link">Admin</router-link>
+            <router-link to="/checkout" class="nav-link">Checkout</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/contact" class="nav-link">Contact us</router-link>
