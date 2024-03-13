@@ -315,17 +315,27 @@ try {
           setDays(context,payload){
             context.commit('setDays', payload)
           }
-        },
-        async fetchDay(context,payload){
+        },  
+        // fetching salary table 
+         async fetchSalary(context){
           try {
-            let result = await fetch(`${Urldata}/leave/${payload.id}`)
+          let result = await fetch(`${Urldata}/salary`) 
+          let data = await result.json()
+          context.commit("setPay",data.result) 
+          } catch (e) {
+            console.log(e);
+          }
+        },
+        async fetchpay(context,payload){
+          try {
+            let result = await fetch(`${Urldata}/salary/${payload.id}`)
             let data = await result.json()
             if(result){
-              context.commit("setDay", result)
+              context.commit("setPaid", result)
             }else{
               sweet({
-                title: "Retrieving a a leave day",
-                text: "No leave available",
+                title: "Retrieving your salary",
+                text: "No salary available",
                 icon: "info",
                 timer: 2000
               })
@@ -334,15 +344,15 @@ try {
             
               sweet({
                 title: "Error",
-                text: "leave day could not be accessed",
+                text: "salary could not be accessed",
                 icon: "error",
                 timer: 2000
     
               })
             }},
-            async addleave(context, payload){
+            async newSalary(context, payload){
               try {
-                let result = await fetch(`${Urldata}/leave/addleave`,{
+                let result = await fetch(`${Urldata}/salary/addpay`,{
                   method: "POST",
                   headers:{
                     "Content-Type":"applicaation/json"
@@ -351,21 +361,21 @@ try {
                 })
                 let data = await result.json()
                 console.log('ad', data)
-                context.dispatch("fetchDays");
+                context.dispatch("fetchSalary");
               } catch (e) {
                 console.log(e);
                 sweet({
                   title:'Error',
-                  text: 'Failed to add a leave day',
+                  text: 'Failed to add salary input',
                   icon: 'error',
                   timer: 2000
                 })
                 
               }
             },
-            async updateLeave(context, payload){
+            async updateSalary(context, payload){
     try {
-      let result = await fetch(`${Urldata}/leave/update/${payload.staffNo}`,{
+      let result = await fetch(`${Urldata}/salary/update/${payload.staffNo}`,{
         method: "PATCH",
         headers:{
           "Content-Type":"application/json"
@@ -374,30 +384,30 @@ try {
       })
       let data = await result.json()
       console.log(data);
-      context.dispatch('fetchDays')
+      context.dispatch('fetchSalary')
       sweet({
-        title:'leave day changed',
-        text: 'leave day updated',
+        title:'salary was changed',
+        text: 'Salary has been updated',
         icon: 'successs',
         timer: 2000
       })
     } catch (e) {
       sweet({
         title: 'Error',
-        text: "Could not update leave",
+        text: "Could not update salary",
         icon: 'error',
         timer:2000
       })
     }
             },
-            async deleteLeave(context, payload){
+            async deletePay(context, payload){
               try {
-                let result = await fetch(`${Urldata}/leave/delete/${payload}`,{
+                let result = await fetch(`${Urldata}/salary/delete/${payload}`,{
                   method: "DELETE"
                 })
                 let data = await result.json()
                 console.log(data);
-                context.dispatch('fetchDays')
+                context.dispatch('fetchSalary')
                 sweet({
                   title: "Leave day was deleted",
                   text: "leave removed succesfully",
@@ -413,7 +423,7 @@ try {
                 })
               }
               setDays(context,payload){
-                context.commit('setDays', payload)
+                context.commit('setPay', payload)
               }
             }
         
