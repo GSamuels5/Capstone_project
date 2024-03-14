@@ -1,6 +1,7 @@
 *,
 ::before,
 ::after{
+  font-family: righteous;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -60,11 +61,17 @@
   }
   .formation{
     background-color: aqua;
+    border-color: black;
+    border: solid 2px ;
+    
   }
   #message{
     margin-right: auto;
   }
   label{
     font-weight: bold;
+    }
+    .products{
+      background-color: rgb(27, 238, 69);
     }
   
