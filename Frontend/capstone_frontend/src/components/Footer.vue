@@ -1,11 +1,13 @@
 <template>
     
-    <div class="container-fluid bg-warning feet">
+    <div class="container-fluid bg-dark-subtle feet">
         <div class="row">
-            <p class="lead"> www.AvatarG.co.za
+            <u>
+                <p class="lead"> www.AvatarG.co.za
                 &copy;
                 <span>{{ currYear }}</span>
             </p>
+                </u>
         </div>
 
     </div>
