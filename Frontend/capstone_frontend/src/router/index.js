@@ -20,10 +20,10 @@ const routes = [
       component: () => import( '@/views/EmployeesView.vue')
     },
     {
-      path: '/checkout',
-      name: 'checkout',
+      path: '/admin',
+      name: 'admin',
   
-      component: () => import( '@/views/CheckoutView.vue')
+      component: () => import( '@/views/AdminView.vue')
     },
     {
       path: '/contact',
