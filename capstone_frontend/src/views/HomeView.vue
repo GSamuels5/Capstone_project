@@ -10,18 +10,19 @@
       <div class=" bbg w-25  row"><span>Total Departments</span></div>
       <div class="bbg w-25  row"><span>Total active employees</span></div>
     </div>
-    <LoginComp v-if="showLogin"/>
+    <LoginView v-if="showLogin"/>
   </div>
 </template>
 
 <script>
-import LoginComp from '../components/LoginComp.vue'
+import LoginView from './LoginView.vue'
+
 
 
 export default {
   name: 'HomeView',
   components: {
-  LoginComp
+  LoginView
   },
   data(){
     return{
