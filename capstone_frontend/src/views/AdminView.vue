@@ -5,7 +5,8 @@
     <h4>Employees</h4>
     <table class="table">
         <thead>
-            <tr>
+            <tr >
+                
                     <th scope="col">staffNo</th>
                 <th scope="col">Name</th>
                   <th scope="col">Surname</th>
@@ -18,10 +19,12 @@
             </tr>
         </thead>
         <tbody>
-            
-                 <tr>
-                    <td></td> 
-                    <td></td>
+            <div v-if="workers">
+
+                 <tr v-for="user in workers" :key="user.staffNo">
+
+                    <td>{{worker}}</td> 
+<td></td>
                      <td></td>
                      <td></td> 
                      <td></td>  
@@ -31,9 +34,11 @@
                 <button>Delete</button>
                 </td>         </tr>
             
+            </div>
         </tbody>
     </table>
 </div>
+<div>{{workers}}</div>
 <div class="container products mt-5 p-3 shadow  rounded-3 overflow-auto">
     <h4>Salary</h4>
     <table class="table">
@@ -87,6 +92,12 @@
 
 
 export default {
+    computed:{
+
+        workers(){
+            return this.$store.state.workers
+        }
+    }
  
 }
 </script>
