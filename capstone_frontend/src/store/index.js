@@ -164,7 +164,14 @@ export default createStore({
     },
     async login(context, payload){
       try {
-        const{msg,token, result} = (await fetch.post(`${Urldata}/workers/login`,payload)).data
+        const response = await fetch(`${Urldata}/workers/login`,{
+          method: 'POST',
+          headers:{
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+        const{msg,token, result} = await response.json()
         if (result) {
           context.commit("setWorker",{
             msg,
@@ -180,13 +187,13 @@ export default createStore({
           sweet({
             title: msg,
             text: `Welcome back,  
-            ${result?.firstName} ${result?.lastName}
+            ${result?.firstName} ${result?.surname}
             `,
             icon: "success",
             timer: 2000
           })
           router.push({
-            name: "/login"
+            name: "login"
           })
         }else{
           sweet({
