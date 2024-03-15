@@ -64,7 +64,7 @@ export default createStore({
       try {
         let result = await fetch(`${Urldata}/workers/${payload.id}`)
         let data = result.json()
-        if (data) {context.commit('setWorker', result)
+        if (data) {context.commit('setWorker', data)
           
         }else{
           sweet({
