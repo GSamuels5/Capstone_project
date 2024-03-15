@@ -45,11 +45,11 @@ export default createStore({
       try {
         let result = await fetch(`${Urldata}/workers`)
         let data = await result.json()
-        console.log(data);
         if (data) {
           context.commit('setWorkers',data.result)
           
         }
+        
         
       } catch (e) {
         sweet({
