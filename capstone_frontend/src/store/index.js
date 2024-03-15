@@ -6,7 +6,7 @@ import {
 const cookies = useCookies()
 
 import router from '@/router/index.js'
-const Urldata = 'https://capstone-project-1hsh.onrender.com'
+const Urldata = 'capstone-project-3eq4fzua9-gsamuels5s-projects.vercel.app'
 
 export default createStore({
   state: {
@@ -23,6 +23,7 @@ export default createStore({
   mutations: {
     setWorkers(state,value){
       state.workers = value
+      
     }, 
     setWorker(state,value){
       state.worker = value
@@ -64,7 +65,7 @@ export default createStore({
       try {
         let result = await fetch(`${Urldata}/workers/${payload.id}`)
         let data = result.json()
-        if (data) {context.commit('setWorker', data)
+        if (data) {context.commit('setWorker', result)
           
         }else{
           sweet({
@@ -193,7 +194,7 @@ export default createStore({
             timer: 2000
           })
           router.push({
-            name: "login"
+            name: "/login"
           })
         }else{
           sweet({
