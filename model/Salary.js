@@ -10,7 +10,7 @@ class Salary{
             if(err) throw err 
             res.json({
                 status: res.statusCode,
-                results,
+                results
             })
             
         })
@@ -59,7 +59,6 @@ class Salary{
                 msg: 'salary was updated'
             })
         })
-        console.log(data);
     }
     deletePay(req,res){
         const qry = `
