@@ -5,7 +5,6 @@ class Salary{
     fetchSalary(req, res){
         const qry = `select salaryID, amount, staffNo
         from Salary;`
-        
         db.query(qry, (err, results)=>{
             if(err) throw err 
             res.json({
