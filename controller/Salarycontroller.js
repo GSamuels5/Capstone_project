@@ -20,7 +20,7 @@ payRouter.get('/', (req, res)=>{
 payRouter.get('/:id', (req, res)=>{
     try {
         pay.fetchpay(req, res)
-    } catch (error) {
+    } catch (e) {
         res.json({
             status: res.statusCode,
             msg: 'Failed to retrieve a salary information.'

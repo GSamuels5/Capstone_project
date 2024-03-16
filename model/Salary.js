@@ -22,8 +22,8 @@ class Salary{
         amount,
         staffNo
         from Salary
-        where staffNo = "${req.params.id}";`
-        console.log(req.params.id);
+        where salaryID = ${req.params.id};`
+    
         db.query(qry,(err, results)=>{
             if(err) throw err
             res.json({
@@ -37,9 +37,9 @@ class Salary{
         insert into Salary set ?;`
         
         db.query(qry,[req.body] ,(err)=>{
-            console.log(req.body);
+        
             if(err) throw err
-           return res.json({
+         res.json({
                 status: res.statusCode,
                 msg: 'new salary added'
               
@@ -50,7 +50,7 @@ class Salary{
         let data = req.body;
         console.log(data);
         const qry = `
-        update Salary set ? where staffNo = "${req.params.id}"; `
+        update Salary set ? where salaryID = "${req.params.id}"; `
         console.log(req.params.id);
         db.query(qry,[req.body] ,(err)=>{
             if(err) throw err
@@ -63,7 +63,7 @@ class Salary{
     deletePay(req,res){
         const qry = `
         DELETE FROM Salary
-        WHERE staffNo = ${req.params.id};
+        WHERE salaryID = ${req.params.id};
         `
         db.query(qry, (err)=>{
             if(err) throw err 

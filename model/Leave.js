@@ -24,7 +24,7 @@ class Leave{
         leaveDays,
         leaveReason
         from Leavedays
-        where staffNo = "${req.params.id}";`
+        where LeaveID = "${req.params.id}";`
         db.query(qry,(err, results)=>{
             if(err) throw err
             res.json({
@@ -48,7 +48,7 @@ class Leave{
     updateLeave(req,res){
         let data = req.body;
         const qry = `
-        update Leavedays set ? where staffNo = "${req.params.id}"; `
+        update Leavedays set ? where LeaveID = "${req.params.id}"; `
         db.query(qry,[req.body] ,(err)=>{
             if(err) throw err
             res.json({
@@ -61,7 +61,7 @@ class Leave{
     deleteLeave(req,res){
         const qry = `
         DELETE FROM Leavedays
-        WHERE staffNo = ${req.params.id};
+        WHERE LeaveID = ${req.params.id};
         `
         db.query(qry, (err)=>{
             if(err) throw err 
