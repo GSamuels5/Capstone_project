@@ -8,7 +8,7 @@ class Salary {
         const qry = `select salaryID, amount, staffNo
         from Salary;`
         db.query(qry, (err, results) => {
-            if (err) throw err
+            if(err) throw err
             res.json({
                 status: res.statusCode,
                 results
@@ -26,7 +26,7 @@ class Salary {
         where salaryID = ${req.params.id};`
 
         db.query(qry, (err, results) => {
-            if (err) throw err
+            if(err) throw err
             res.json({
                 status: res.statusCode,
                 results: results[0]
@@ -38,8 +38,7 @@ class Salary {
         insert into Salary set ?;`
 
         db.query(qry, [req.body], (err) => {
-
-            if (err) throw err
+if(err) throw err
             res.json({
                 status: res.statusCode,
                 msg: 'new salary added'
@@ -52,7 +51,7 @@ class Salary {
         const qry = `
         update Salary set ? where salaryID = "${req.params.id}"; `
         db.query(qry, [req.body], (err) => {
-            if (err) throw err
+            if(err) throw err
             res.json({
                 status: res.statusCode,
                 msg: 'salary was updated'
@@ -65,7 +64,7 @@ class Salary {
         WHERE salaryID = ${req.params.id};
         `
         db.query(qry, (err) => {
-            if (err) throw err
+            if(err) throw err
             res.json({
                 status: res.statusCode,
                 msg: "The salary information has been deleted."
