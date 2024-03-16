@@ -6,7 +6,7 @@ class Employees{
 fetchEmployees(req, res){
     const qry = `SELECT staffNo, firstName,
      surname, empEmail,
-     empPwd,empAge , 
+     empPwd,empAge , empRole,empImg,
      department FROM Employees;`
     
     db.query(qry, (err, result)=>{
@@ -15,7 +15,6 @@ fetchEmployees(req, res){
             status: res.statusCode,
             result
         })
-        console.log(err);
     })
     }
 
@@ -112,7 +111,7 @@ login(req,res){
     const {empEmail, empPwd} = req.body
     const qry = `
     select staffNo, firstName, surname,
-    empEmail,  empPwd, empAge, department
+    empEmail,  empPwd, empAge, department, empRole
     from Employees
     where empEmail = "${empEmail}";`
     db.query(qry, async(err, result)=>{
