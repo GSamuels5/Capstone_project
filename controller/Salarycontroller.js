@@ -29,7 +29,7 @@ payRouter.get('/:id', (req, res)=>{
     }
 })
 // add salary
-payRouter.post('/addpay', (req,res)=>{
+payRouter.post('/addpay', bodyParser.json(),(req,res)=>{
     try {
         pay.newSalary(req, res)
     } catch (err) {
@@ -39,7 +39,7 @@ payRouter.post('/addpay', (req,res)=>{
         })
     }
 })
-payRouter.patch('/update/:id',
+payRouter.patch('/update/:id', bodyParser.json(),
 (req,res)=>{
     try {
         pay.updateSalary(req, res)
@@ -56,7 +56,7 @@ payRouter.delete('/delete/:id', (req, res)=>{
     }catch(e) {
         res.json({
             status: res.statusCode,
-            msg: "Failed to delete a amount"
+            msg: "Failed to delete an amount"
         })
     }
 })

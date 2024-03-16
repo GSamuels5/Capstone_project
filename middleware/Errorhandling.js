@@ -1,5 +1,4 @@
 function errorHandling(err, req, res, next) {
-    console.log(res)
     if (err || res.statusCode >= 400) {
 
         res.json({

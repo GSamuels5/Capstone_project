@@ -5,7 +5,6 @@ config();
 
 const { sign, verify } = jwt;
 function createToken(user){
-    console.log( user )
     return sign({
         empEmail: user.empEmail,
         empPwd: user.empPwd
@@ -21,7 +20,7 @@ function verifyAToken(token){
 }
 function verifyToken(req,res, next) {
     // retrieve a token from the browser
-   const token = req.header['Authorization']
+   const token = req?.header['Authorization']
    if (token) {
     if (verify(token, process.env.SECRET_KEY)){
         next()

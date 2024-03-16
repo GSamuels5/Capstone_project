@@ -1,7 +1,5 @@
 import express from "express";
 import { days } from "../model/model.js";
-import { workRouter } from "./Employeecontroller.js";
-import { verifyToken } from "../middleware/Authentication.js";
 import bodyParser from "body-parser";
 const leaveRouter = express.Router()
 // fetch leave days
@@ -20,7 +18,7 @@ leaveRouter.get('/',(req, res)=>{
 leaveRouter.get('/:id', (req, res)=>{
     try {
         days.fetchDay(req, res)
-    } catch (error) {
+    } catch (e) {
         res.json({
             status: res.statusCode,
             msg: 'Failed to retrieve a leave day.'
@@ -31,7 +29,7 @@ leaveRouter.get('/:id', (req, res)=>{
 leaveRouter.post('/addLeave',bodyParser.json(),  (req,res)=>{
     try {
         days.addleave(req, res)
-    } catch (error) {
+    } catch (e) {
         res.json({
 
 
