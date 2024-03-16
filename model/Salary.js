@@ -3,7 +3,7 @@ import { connection as db } from "../config/database.js";
 
 class Salary{
     fetchSalary(req, res){
-        const qry = `select *
+        const qry = `select salaryID, amount, staffNo
         from Salary;`
         
         db.query(qry, (err, results)=>{

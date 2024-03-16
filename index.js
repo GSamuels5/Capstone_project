@@ -23,7 +23,7 @@ app.use(
     express.static('./static'),
     express.json(),
     express.urlencoded({
-        extended: true
+        extended: true,
     }),
     cookieParser(),
     cors()

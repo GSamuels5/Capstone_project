@@ -32,7 +32,7 @@ payRouter.get('/:id', (req, res)=>{
 payRouter.post('/addpay', bodyParser.json(),(req,res)=>{
     try {
         pay.newSalary(req, res)
-    } catch (err) {
+    } catch (e) {
         res.json({
             status: res.statusCode,
             msg: 'Failed to add an amount'
