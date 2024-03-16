@@ -1,78 +1,80 @@
-import { connection as db } from "../config/database.js";
+import {
+    connection as db
+} from "../config/database.js";
 
 
-class Salary{
-    fetchSalary(req, res){
+class Salary {
+    fetchSalary(req, res) {
         const qry = `select salaryID, amount, staffNo
         from Salary;`
-        db.query(qry, (err, results)=>{
-            if(err) throw err 
+        db.query(qry, (err, results) => {
+            if (err) throw err
             res.json({
                 status: res.statusCode,
                 results
             })
-            
+
         })
     }
     // Salary by FK
-    fetchpay(req,res){
+    fetchpay(req, res) {
         const qry = `
         Select salaryID,
         amount,
         staffNo
         from Salary
         where salaryID = ${req.params.id};`
-    
-        db.query(qry,(err, results)=>{
-            if(err) throw err
+
+        db.query(qry, (err, results) => {
+            if (err) throw err
             res.json({
                 status: res.statusCode,
                 results: results[0]
             })
         })
     }
- newSalary(req,res){
+    newSalary(req, res) {
         const qry = `
         insert into Salary set ?;`
-        
-        db.query(qry,[req.body] ,(err)=>{
-        
-            if(err) throw err
-         res.json({
+
+        db.query(qry, [req.body], (err) => {
+
+            if (err) throw err
+            res.json({
                 status: res.statusCode,
                 msg: 'new salary added'
-              
+
             })
         })
     }
-    updateSalary(req,res){
+    updateSalary(req, res) {
         let data = req.body;
         const qry = `
         update Salary set ? where salaryID = "${req.params.id}"; `
-        db.query(qry,[req.body] ,(err)=>{
-            if(err) throw err
+        db.query(qry, [req.body], (err) => {
+            if (err) throw err
             res.json({
                 status: res.statusCode,
                 msg: 'salary was updated'
             })
         })
     }
-    deletePay(req,res){
+    deletePay(req, res) {
         const qry = `
         DELETE FROM Salary
         WHERE salaryID = ${req.params.id};
         `
-        db.query(qry, (err)=>{
-            if(err) throw err 
+        db.query(qry, (err) => {
+            if (err) throw err
             res.json({
-                status: res.statusCode, 
-                msg: "The salary information has been deleted." 
-    })
-})
+                status: res.statusCode,
+                msg: "The salary information has been deleted."
+            })
+        })
     }
 }
 
 
 export {
-Salary
+    Salary
 }
