@@ -6,7 +6,7 @@ import {
 const cookies = useCookies()
 
 import router from '@/router/index.js'
-const Urldata = 'https://capstone-project-1hsh.onrender.com'
+const Urldata = 'https://capstone-project-1hsh.onrender.com/'
 
 export default createStore({
   state: {
@@ -43,13 +43,12 @@ export default createStore({
   actions: {
     async fetchEmployees(context){
       try {
-        let result = await fetch(`${Urldata}/workers`)
+        let result = await fetch(`${Urldata}workers`)
         let data = await result.json()
         if (data) {
-          context.commit('setWorkers',data.result)
+          context.commit('setWorkers',data)
           
         }
-        
         
       } catch (e) {
         sweet({

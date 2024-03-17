@@ -14,10 +14,10 @@ const routes = [
       component: () => import( '@/views/DashboardView.vue')
     },
     {
-      path: '/employees',
-      name: 'employees',
+      path: '/employee',
+      name: 'employee',
   
-      component: () => import( '@/views/EmployeesView.vue')
+      component: () => import( '@/views/EmployeeView.vue')
     },
     {
       path: '/admin',
