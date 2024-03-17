@@ -12,33 +12,38 @@
                   <th scope="col">Surname</th>
                       <th scope="col">Department</th>
                         <th scope="col">Age</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Role</th>
+
                           <th scope="col">Email</th>
-                          <th scope="col">Password</th>
+                        
                           <th scope="col">Action</th>
 
             </tr>
         </thead>
-        <tbody>
-            <div v-if="workers">
+        <tbody v-if="workers">
+            
 
                  <tr v-for="user in workers" :key="user.staffNo">
 
-                    <td>{{worker}}</td> 
-<td></td>
-                     <td></td>
-                     <td></td> 
-                     <td></td>  
-                <td></td>  
-                <td></td>
-                <td><button>Edit</button>
-                <button>Delete</button>
+                    <td>{{user.staffNo}}</td> 
+<td>{{user.firstName}}</td>
+                     <td>{{user.surname}}</td>
+                     <td>{{user.empPwddepartment}}</td> 
+                     <td>{{user.empAge}}</td>  
+                <td>{{user.empImg}}</td>  
+                <td>{{user.empRole}}</td>
+                <td>{{user.empEmail}}</td>
+            
+                <td><button  class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
                 </td>         </tr>
             
-            </div>
+        
         </tbody>
     </table>
 </div>
-<div>{{workers}}</div>
+<div></div>
 <div class="container products mt-5 p-3 shadow  rounded-3 overflow-auto">
     <h4>Salary</h4>
     <table class="table">
@@ -55,8 +60,8 @@
                 <td></td> 
                 <td></td>  
                 <td></td>
-                <td><button>Edit</button>
-                <button>Delete</button>
+                <td><button  class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
                 </td>         </tr>
         </tbody>
     </table>
@@ -79,8 +84,8 @@
                 <td></td> 
                 <td></td>  
                 <td></td>
-                <td><button>Edit</button>
-                <button>Delete</button>
+                <td><button  class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
                 </td>         </tr>
         </tbody>
     </table>
@@ -96,7 +101,12 @@ export default {
 
         workers(){
             return this.$store.state.workers
+            
         }
+    },
+    mounted(){
+        this.$store.dispatch('fetchEmployees')
+        console.log(this.$store.dispatch('fetchEmployees'));
     }
  
 }

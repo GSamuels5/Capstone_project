@@ -23,8 +23,8 @@
             <router-link to="/dash" class="nav-link">Dashboard</router-link>
           </li>
           <li class="nav-item mx-2">
-            <router-link to="/employees" class="nav-link"
-              >Employees</router-link
+            <router-link to="/employee" class="nav-link"
+              >Employee</router-link
             >
           </li>
           <li class="nav-item mx-2">

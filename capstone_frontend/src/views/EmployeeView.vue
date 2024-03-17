@@ -1,6 +1,6 @@
 <template>
     <div>
-<h1>Admin</h1>
+<h1>Employee</h1>
     </div>
 </template>
 
@@ -8,9 +8,10 @@
 
 
 export default {
- 
+
 }
 </script>
+
 <style  scoped>
 
 </style>
