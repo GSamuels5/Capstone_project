@@ -41,7 +41,7 @@ let user = {
 }
 
 const qry = `INSERT INTO Employees SET ?;`
-console.log(data);
+
 db.query(qry, [data], (err)=>{
     if(err){
         res.json({
