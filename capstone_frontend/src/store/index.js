@@ -61,7 +61,7 @@ export default createStore({
     },
     async fetchEmployee(context, payload){
       try {
-        let result = await fetch(`${Urldata}/workers/${payload.id}`)
+        let result = await fetch(`${Urldata}workers/${payload.id}`)
         let data = result.json()
         if (data) {context.commit('setWorker', data)
           
@@ -85,7 +85,7 @@ export default createStore({
     },
     async updateEmployee(context, payload){
       try {
-        await fetch(`${Urldata}/workers/update/${payload.staffNo}`),{
+        await fetch(`${Urldata}workers/update/${payload.staffNo}`),{
           method: "PATCH",
           header: {
             "Content-Type": "application/json"
@@ -112,7 +112,7 @@ export default createStore({
     },
     async deleteEmployee(context, payload){
       try {
-        await fetch(`${Urldata}/workers/delete/${payload}`,{
+        await fetch(`${Urldata}workers/delete/${payload}`,{
           method: "DELETE"
         })
         sweet({
@@ -132,7 +132,7 @@ export default createStore({
     },
     async hireEmployee(context, payload){
       try {
-        let  result = await fetch(`${Urldata}/workers/register`,{
+        let  result = await fetch(`${Urldata}workers/register`,{
           method: "POST",
           headers:{
             "Content-Type": "application/json"
@@ -163,7 +163,7 @@ export default createStore({
     },
     async login(context, payload){
       try {
-        const response = await fetch(`${Urldata}/workers/login`,{
+        const response = await fetch(`${Urldata}workers/login`,{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json'
@@ -216,7 +216,7 @@ export default createStore({
     },
     async fetchDays(context){
       try {
-      let result = await fetch(`${Urldata}/leave`) 
+      let result = await fetch(`${Urldata}leave`) 
       let data = await result.json()
       context.commit("setDays",data.result) 
       } catch (e) {
@@ -225,7 +225,7 @@ export default createStore({
     },
     async fetchDay(context,payload){
       try {
-        let result = await fetch(`${Urldata}/leave/${payload.id}`)
+        let result = await fetch(`${Urldata}leave/${payload.id}`)
         let data = await result.json()
         if(data){
           context.commit("setDay", data)
@@ -249,7 +249,7 @@ export default createStore({
         }},
         async addleave(context, payload){
           try {
-            let result = await fetch(`${Urldata}/leave/addleave`,{
+            let result = await fetch(`${Urldata}leave/addleave`,{
               method: "POST",
               headers:{
                 "Content-Type":"applicaation/json"
@@ -272,7 +272,7 @@ export default createStore({
         },
         async updateLeave(context, payload){
 try {
-  let result = await fetch(`${Urldata}/leave/update/${payload.staffNo}`,{
+  let result = await fetch(`${Urldata}leave/update/${payload.staffNo}`,{
     method: "PATCH",
     headers:{
       "Content-Type":"application/json"
@@ -299,7 +299,7 @@ try {
         },
         async deleteLeave(context, payload){
           try {
-            let result = await fetch(`${Urldata}/leave/delete/${payload}`,{
+            let result = await fetch(`${Urldata}leave/delete/${payload}`,{
               method: "DELETE"
             })
             let data = await result.json()
@@ -326,7 +326,7 @@ try {
         // fetching salary table 
          async fetchSalary(context){
           try {
-          let result = await fetch(`${Urldata}/salary`) 
+          let result = await fetch(`${Urldata}salary`) 
           let data = await result.json()
           context.commit("setPay",data.result) 
           } catch (e) {
@@ -335,7 +335,7 @@ try {
         },
         async fetchpay(context,payload){
           try {
-            let result = await fetch(`${Urldata}/salary/${payload.id}`)
+            let result = await fetch(`${Urldata}salary/${payload.id}`)
             let data = await result.json()
             if(data){
               context.commit("setPaid", data)
@@ -359,7 +359,7 @@ try {
             }},
             async newSalary(context, payload){
               try {
-                let result = await fetch(`${Urldata}/salary/addpay`,{
+                let result = await fetch(`${Urldata}salary/addpay`,{
                   method: "POST",
                   headers:{
                     "Content-Type":"applicaation/json"
@@ -382,7 +382,7 @@ try {
             },
             async updateSalary(context, payload){
     try {
-      let result = await fetch(`${Urldata}/salary/update/${payload.staffNo}`,{
+      let result = await fetch(`${Urldata}salary/update/${payload.staffNo}`,{
         method: "PATCH",
         headers:{
           "Content-Type":"application/json"
@@ -409,7 +409,7 @@ try {
             },
             async deletePay(context, payload){
               try {
-                let result = await fetch(`${Urldata}/salary/delete/${payload}`,{
+                let result = await fetch(`${Urldata}salary/delete/${payload}`,{
                   method: "DELETE"
                 })
                 let data = await result.json()
