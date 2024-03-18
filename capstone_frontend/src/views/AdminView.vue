@@ -55,11 +55,12 @@
                  <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td></td> 
-                <td></td>  
-                <td></td>
+        <tbody v-if="Salary">
+            <tr v-for="money in pay" :key="money.salaryID">
+                <td>
+                    {{money.salaryID}}</td> 
+                <td> {{money.staffNo}}</td>  
+                <td>R {{money.amount}}</td>
                 <td><button  class="btn btn-primary">Edit</button>
                 <button class="btn btn-danger">Delete</button>
                 </td>         </tr>
@@ -78,12 +79,12 @@
                  <th scope="col">Action</th>
             </tr>   
         </thead>
-        <tbody>
-             <tr>
-                <td></td> 
-                <td></td> 
-                <td></td>  
-                <td></td>
+        <tbody v-if="leaveDays">
+             <tr v-for="leave in days" :key="leave.LeaveID">
+                <td>{{leave.LeaveID}}</td> 
+                <td>{{leave.staffNo}}</td> 
+                 <td>{{leave.leavedays}}</td>   
+                 <td>{{leave.leaveReason}}</td> 
                 <td><button  class="btn btn-primary">Edit</button>
                 <button class="btn btn-danger">Delete</button>
                 </td>         </tr>
@@ -98,15 +99,21 @@
 
 export default {
     computed:{
-
         workers(){
             return this.$store.state.workers
             
+        },
+            Salary(){
+            return this.$store.state.pay
+            },
+        leaveDays(){
+            return this.$store.state.days
         }
     },
     mounted(){
         this.$store.dispatch('fetchEmployees')
-        console.log(this.$store.dispatch('fetchEmployees'));
+    this.$store.dispatch('fetchSalary')
+    this.$store.dispatch('fetchDays')
     }
  
 }
