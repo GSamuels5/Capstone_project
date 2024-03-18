@@ -6,7 +6,8 @@ import {
 const cookies = useCookies()
 
 import router from '@/router/index.js'
-const Urldata = 'https://capstone-project-1hsh.onrender.com/'
+
+const Urldata = 'https://capstone-project-1hsh.onrender.com'
 
 export default createStore({
   state: {
@@ -43,7 +44,7 @@ export default createStore({
   actions: {
     async fetchEmployees(context){
       try {
-        let result = await fetch(`${Urldata}workers`)
+        let result = await fetch(`${Urldata}/workers`)
         let data = await result.json()
         if (data) {
           context.commit('setWorkers',data)
@@ -61,7 +62,7 @@ export default createStore({
     },
     async fetchEmployee(context, payload){
       try {
-        let result = await fetch(`${Urldata}workers/${payload.id}`)
+        let result = await fetch(`${Urldata}/workers/${payload.id}`)
         let data = result.json()
         if (data) {context.commit('setWorker', data)
           
@@ -85,7 +86,7 @@ export default createStore({
     },
     async updateEmployee(context, payload){
       try {
-        await fetch(`${Urldata}workers/update/${payload.staffNo}`),{
+        await fetch(`${Urldata}/workers/update/${payload.staffNo}`),{
           method: "PATCH",
           header: {
             "Content-Type": "application/json"
@@ -112,7 +113,7 @@ export default createStore({
     },
     async deleteEmployee(context, payload){
       try {
-        await fetch(`${Urldata}workers/delete/${payload}`,{
+        await fetch(`${Urldata}/workers/delete/${payload}`,{
           method: "DELETE"
         })
         sweet({
@@ -132,7 +133,7 @@ export default createStore({
     },
     async hireEmployee(context, payload){
       try {
-        let  result = await fetch(`${Urldata}workers/register`,{
+        let  result = await fetch(`${Urldata}/workers/register`,{
           method: "POST",
           headers:{
             "Content-Type": "application/json"
@@ -163,13 +164,17 @@ export default createStore({
     },
     async login(context, payload){
       try {
-        const response = await fetch(`${Urldata}workers/login`,{
+      
+        const response = await fetch(`${Urldata}/workers/login` ,{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)
+          
         })
+      
+
         const{msg,token, result} = await response.json()
         if (result) {
           context.commit("setWorker",{
@@ -216,16 +221,24 @@ export default createStore({
     },
     async fetchDays(context){
       try {
-      let result = await fetch(`${Urldata}leave`) 
+      let result = await fetch(`${Urldata}/leave`) 
       let data = await result.json()
-      context.commit("setDays",data.result) 
-      } catch (e) {
-        console.log(e);
+      if (data) {
+        context.commit("setDays", data) 
+        
       }
-    },
+     
+      } catch (e) {
+        sweet({
+          title: 'Error',
+          text: 'An error occured when retrieving leave days',
+          icon: 'error',
+          timer: 2000
+      })
+    }},
     async fetchDay(context,payload){
       try {
-        let result = await fetch(`${Urldata}leave/${payload.id}`)
+        let result = await fetch(`${Urldata}/leave/${payload.id}`)
         let data = await result.json()
         if(data){
           context.commit("setDay", data)
@@ -249,7 +262,7 @@ export default createStore({
         }},
         async addleave(context, payload){
           try {
-            let result = await fetch(`${Urldata}leave/addleave`,{
+            let result = await fetch(`${Urldata}/leave/addleave`,{
               method: "POST",
               headers:{
                 "Content-Type":"applicaation/json"
@@ -257,8 +270,8 @@ export default createStore({
               body: JSON.stringify(payload)
             })
             let data = await result.json()
-            console.log('ad', data)
-            context.dispatch("fetchDays");
+    
+            context.dispatch("fetchDays", data);
           } catch (e) {
             console.log(e);
             sweet({
@@ -272,7 +285,7 @@ export default createStore({
         },
         async updateLeave(context, payload){
 try {
-  let result = await fetch(`${Urldata}leave/update/${payload.staffNo}`,{
+  let result = await fetch(`${Urldata}/leave/update/${payload.staffNo}`,{
     method: "PATCH",
     headers:{
       "Content-Type":"application/json"
@@ -281,7 +294,7 @@ try {
   })
   let data = await result.json()
   console.log(data);
-  context.dispatch('fetchDays')
+  context.dispatch('fetchDays', data)
   sweet({
     title:'leave day changed',
     text: 'leave day updated',
@@ -299,12 +312,12 @@ try {
         },
         async deleteLeave(context, payload){
           try {
-            let result = await fetch(`${Urldata}leave/delete/${payload}`,{
+            let result = await fetch(`${Urldata}/leave/delete/${payload}`,{
               method: "DELETE"
             })
             let data = await result.json()
             console.log(data);
-            context.dispatch('fetchDays')
+            context.dispatch('fetchDays', data)
             sweet({
               title: "Leave day was deleted",
               text: "leave removed succesfully",
@@ -326,11 +339,21 @@ try {
         // fetching salary table 
          async fetchSalary(context){
           try {
-          let result = await fetch(`${Urldata}salary`) 
+          let result = await fetch(`${Urldata}/salary`) 
           let data = await result.json()
-          context.commit("setPay",data.result) 
+          if(data){
+
+            context.commit("setPay",data) 
+          }
           } catch (e) {
-            console.log(e);
+            sweet({
+
+              title: 'Error',
+              text: 'An error occured when retrieving leave days',
+              icon: 'error',
+              timer: 2000
+            })
+      
           }
         },
         async fetchpay(context,payload){
@@ -368,7 +391,7 @@ try {
                 })
                 let data = await result.json()
                 console.log('ad', data)
-                context.dispatch("fetchSalary");
+                context.dispatch("fetchSalary",data);
               } catch (e) {
                 console.log(e);
                 sweet({
