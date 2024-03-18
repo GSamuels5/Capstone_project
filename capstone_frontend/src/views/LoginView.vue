@@ -2,17 +2,17 @@
     <div class="login rounded-5 mb-5">
         <div class="col">
             <h1>Login-Form</h1>
-            <form @submit.prevent="loginUser">
+            <form>
         
              <label id="email">
                 Enter email:
             </label>
-            <input type="text" for="email" placeholder="enter your email" required v-model="data.email"><br>
+            <input type="text" for="email" placeholder="enter your email" required v-model="data.empEmail"><br>
              <label id="password">
                 Enter password:
             </label>
-            <input type="password" for="staffNo" v-model="data.password" placeholder="enter your password" required><br>
-            <button type="submit" @click=" loginUser" >Log-in</button>
+            <input type="password" for="staffNo" v-model="data.empPwd" placeholder="enter your password" required><br>
+            <button type="button" @click.prevent=" loginUser" >Log-in</button>
 
             </form>
         </div>
@@ -27,8 +27,8 @@ export default {
         return{
             data:{
 
-                email: '',
-                password: ''
+                empEmail: '',
+                empPwd: ''
              }
         }
     },

@@ -163,8 +163,9 @@ export default createStore({
       }
     },
     async login(context, payload){
+
       try {
-      
+        console.log(payload);
         const response = await fetch(`${Urldata}/workers/login` ,{
           method: 'POST',
           headers:{
@@ -197,7 +198,7 @@ export default createStore({
             timer: 2000
           })
           router.push({
-            name: "login"
+            name: "home"
           })
         }else{
           sweet({
