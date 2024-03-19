@@ -38,5 +38,7 @@ name:'footerComp',
 </script>
 
 <style scoped>
-
+.lead{
+    color: black;
+}
 </style>

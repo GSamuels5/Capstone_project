@@ -37,7 +37,7 @@
         </ul>
         <form class="d-flex" role="search">
           
-          <button class="btn btn-outline-success bg-primary-subtle w-100" type="submit">Sign-up</button>
+          <button class="btn btn-outline-dark bg-primary-subtle w-100" type="submit"><b>Sign-up</b></button>
         </form>
       </div>
     </div>
