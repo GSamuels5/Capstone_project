@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-0">
+  <div class="mb-5">
     <h1>Admin</h1>
     <div class="container products mt-5 p-3 shadow rounded-3 overflow-auto">
       <h4>Employees</h4>

@@ -4,7 +4,7 @@
       <h1>Contact us</h1>
     </div>
     <div
-      class="formation container rounded shadow align-content-sm-center justify-content-center"
+      class="formation container rounded shadow align-content-sm-center justify-content-center text-dark"
     >
       <form action="https://formspree.io/f/xqkrlond" method="post">
         <div class="forming row col-12 m-0">
