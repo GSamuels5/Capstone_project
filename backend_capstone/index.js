@@ -20,21 +20,13 @@ app.use((req,res, next)=>{
     next();
 });
 app.use(
-    cors({
-        origin: "*",
-        credentials: true,
-        methods: "*",
-        allowedHeaders: "*",
-        exposedHeaders: "Authorization",
-    })
-)
-app.use(
     express.static('./static'),
     express.json(),
     express.urlencoded({
         extended: true,
     }),
-    cookieParser()
+    cookieParser(),
+    cors()
 );
 app.get('/', (req, res)=>{
     res.status(200).sendFile('/static/index.html');
