@@ -188,7 +188,7 @@ export default createStore({
             token,
             result
           },
-          console.log(result)
+          console.log(msg)
           )
           AuthenticateUser.applyToken(token)
           sweet({
