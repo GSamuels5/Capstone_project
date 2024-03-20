@@ -43,6 +43,5 @@ function verifyToken(req,res, next) {
 
 export {
     createToken,
-    verifyAToken,
     verifyToken
 }
