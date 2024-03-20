@@ -6,6 +6,7 @@ import {
 const cookies = useCookies()
 
 import router from '@/router/index.js'
+import AuthenticateUser from '@/service/AuthenticateUser'
 
 const Urldata = 'https://capstone-project-1hsh.onrender.com'
 
@@ -165,7 +166,6 @@ export default createStore({
     async login(context, payload){
 
       try {
-        console.log(payload);
         const response = await fetch(`${Urldata}/workers/login` ,{
           method: 'POST',
           headers:{
@@ -175,7 +175,7 @@ export default createStore({
           
         })
       
-
+        console.log(payload);
         const{msg,token, result} = await response.json()
         if (result) {
           context.commit("setWorker",{
@@ -183,12 +183,14 @@ export default createStore({
             result
           })
           cookies.set("Worker",{
-
+            
             msg,
             token,
             result
-          }
+          },
+          console.log(result)
           )
+          AuthenticateUser.applyToken(token)
           sweet({
             title: msg,
             text: `Welcome back,  
@@ -198,7 +200,7 @@ export default createStore({
             timer: 2000
           })
           router.push({
-            name: "home"
+            name: "login"
           })
         }else{
           sweet({
