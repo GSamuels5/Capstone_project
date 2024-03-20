@@ -126,7 +126,7 @@ class Employees {
     empEmail,  empPwd, empAge, department, empRole
     from Employees
     where empEmail = "${empEmail}";`
-        db.query(qry, async (err, result) => {
+        db.query(qry, async(err, result) => {
             if (err) throw err
             if (!result?.length) {
                 res.json({
