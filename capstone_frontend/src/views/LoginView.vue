@@ -68,5 +68,7 @@ export default {
       border-radius: 5px;
       border: 1px solid #ffffff;
   }
-
+ .form-group {
+      margin-bottom: 20px;
+  }
 </style>
