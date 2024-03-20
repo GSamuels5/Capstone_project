@@ -8,7 +8,7 @@ import {
 } from "bcrypt"
 import {
     createToken,
-    verifyAToken
+    verifyToken
 } from '../middleware/Authentication.js'
 class Employees {
     // fetch all employees
