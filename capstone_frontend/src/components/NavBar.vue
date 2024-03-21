@@ -47,4 +47,10 @@
 
 <script></script>
 
-<style scoped></style>
+<style scoped>
+@media (300px >= width <= 900px){
+.nav-item{
+  background-color: none;
+}
+}
+</style>
