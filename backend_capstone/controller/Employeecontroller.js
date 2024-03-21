@@ -71,6 +71,8 @@ workRouter.post('/login', bodyParser.json(), (req,res)=>
 {
     try {
         workers.login(req,res)
+        console.log(req)
+        console.log(res)
     } catch (e) {
         res.json({
             status: res.statusCode,
