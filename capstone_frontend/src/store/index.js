@@ -174,8 +174,6 @@ export default createStore({
           body: JSON.stringify(payload)
           
         })
-      
-        console.log(payload);
         const{msg,token, result} = await response.json()
         if (result) {
           context.commit("setWorker",{
@@ -183,12 +181,10 @@ export default createStore({
             result
           })
           cookies.set("Worker",{
-            
             msg,
             token,
             result
           },
-          console.log(msg)
           )
           AuthenticateUser.applyToken(token)
           sweet({
@@ -209,9 +205,7 @@ export default createStore({
             icon:"info",
             timer: 2000
           })
-        }
-
-        
+        }  
       } catch (e) {
         sweet({
           title: "Error",

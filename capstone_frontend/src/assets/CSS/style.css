@@ -71,9 +71,9 @@ font-weight: bold;
   label{
     font-weight: bold;
     }
-    .products{
-      background-color: rgb(27, 238, 69);
-    }
+@media (300px <= width <= 900px){
+
+} 
   
   
  

@@ -1,7 +1,7 @@
 <template>
   <div class="admin">
     <h1>Admin</h1>
-      <button id="modal" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button id="modal" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="setUserModal">
         Add user</button>
       <!-- Button trigger modal -->
 
@@ -18,21 +18,28 @@
           <div class="mb-3">
             <label for="firstName" class="form-label">First name</label>
             <input type="text" class="form-control" id="firstName" required>
-            <label for="firstName" class="form-label">Surname</label>
+            <label for="surname" class="form-label">Surname</label>
             <input type="text" class="form-control" id="surname" required>
-            <label for="firstName" class="form-label">staff number</label>
-            <input type="number" class="form-control" id="staffNo" required>
-            <label for="firstName" class="form-label">Department</label>
+            <label for="staffNo" class="form-label">staff number</label>
+            <input type="number" min="001" max="999" class="form-control" id="staffNo" required>
+            <label for="department" class="form-label">Department</label>
             <input type="text" class="form-control" id="department" required>
-            <label for="firstName" class="form-label">Age</label>
-            <input type="text" class="form-control" id="age" required>
+            <label for="age" class="form-label">Age</label>
+            <input type="number" maxlength="100" class="form-control" id="age" required>
             <label for="firstName" class="form-label">Image</label>
             <input type="url" class="form-control" id="image" required>
             <label for="firstName" class="form-label">Role</label>
-            <input type="text" class="form-control" id="role" required>
-            <label for="firstName" class="form-label">Email</label>
+            <ul class="dropdown-menu bg-dark">
+              <li>
+<button value="admin" class="dropdown-item" @click="setRole">Admin</button>
+              </li>
+              <li>
+<button  value="user" class="dropdown-item" @click="setRole">User</button>
+              </li>
+            </ul>
+            <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" required>
-            <label for="firstName" class="form-label">Password</label>
+            <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" required>
 
           </div>
@@ -40,12 +47,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button @click="userModalSubmit" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>
 </div>
-    <div class="container products mb-5 p-3 shadow rounded-3 overflow-auto">
+    <div class="container users mb-5 p-3 shadow rounded-3 overflow-auto">
       <h4>Employees</h4>
       <table class="table">
         <thead>
@@ -70,20 +77,20 @@
             <td>{{ user.surname }}</td>
             <td>{{ user.empPwddepartment }}</td>
             <td>{{ user.empAge }}</td>
-            <td>{{ user.empImg }}</td>
+            <td><a :href="user.empImg">{{ user.empImg }}</a></td>
             <td>{{ user.empRole }}</td>
             <td>{{ user.empEmail }}</td>
 
-            <td>
-              <button class="btn btn-primary">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+            <td class="d-flex">
+              <button class="btn btn-primary" data-bs-target="#exampleModal" data-bs-toggle="modal" @click="editUser" :value="user.staffNo">Edit</button>
+              <button class="btn btn-danger" @click="deleteUser" :value="user.staffNo">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-           <button id="modal" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+           <button id="modal" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1" @click="setPayModal">
         Add user salary</button>
       <!-- Button trigger modal -->
 
@@ -98,9 +105,9 @@
        <div class="modal-body">
         <form @submit.prevent="addSalary">
           <div class="mb-3">
-            <label for="firstName" class="form-label">staff number</label>
-            <input type="number" class="form-control" id="staffNo" required>
-            <label for="firstName" class="form-label">SalaryID</label>
+            <label for="staffNo" class="form-label">staff number</label>
+            <input type="number" min="001" max="999" class="form-control" id="staffNo" required>
+            <label for="salary" class="form-label">SalaryID</label>
             <input type="text" class="form-control" id="salary" required>
             <label for="firstName" class="form-label">Amount</label>
             <input type="number" class="form-control" step=".01" id="amount" required>
@@ -111,7 +118,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" @click="salaryModalSubmit" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>
@@ -134,15 +141,15 @@
             </td>
             <td>{{ money.staffNo }}</td>
             <td>R {{ money.amount }}</td>
-            <td>
-              <button class="btn btn-primary">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+            <td class="d-flex">
+              <button class="btn btn-primary" data-bs-target="exampleModal1" data-bs-toggle="modal" @click="editSalary" :value="money.salaryID">Edit</button>
+              <button class="btn btn-danger" @click="deleteSalary" :value="money.salaryID">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-          <button id="modal" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          <button id="modal" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2" @click="setLeaveModal">
         Add user leave</button>
       <!-- Button trigger modal -->
 
@@ -157,13 +164,13 @@
        <div class="modal-body">
         <form @submit.prevent="addLeave">
           <div class="mb-3">
-            <label for="firstName" class="form-label">staff number</label>
-            <input type="number" class="form-control" id="staffNo" required>
-            <label for="firstName" class="form-label">LeaveID</label>
-            <input type="number" min="2" maxlength="4" class="form-control" id="leave" required>
+            <label for="staffNo" class="form-label">staff number</label>
+            <input type="number" class="form-control" min="001" max="999" id="staffNo" required>
+            <label for="leave" class="form-label">LeaveID</label>
+            <input type="number" min="1000" max="9998" class="form-control" id="leave" required>
                  <label for="datemax" class="form-label">Date</label>
             <input type="date" class="form-control" id="datemax" name="datemax" required>
-                   <label for="firstName" class="form-label">Reason for absence</label>
+                   <label for="reason" class="form-label">Reason for absence</label>
             <input type="text" class="form-control" id="reason" required>
         
 
@@ -172,12 +179,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary" @click="leaveModalSubmit">Submit</button>
       </div>
     </div>
   </div>
 </div>
-    <div class="container products mb-5 p-3 shadow rounded-3 overflow-auto">
+    <div class="container leave mb-5 p-3 shadow rounded-3 overflow-auto">
       <h4>Leave</h4>
       <table class="table">
         <thead>
@@ -196,8 +203,8 @@
             <td>{{ leave.leavedays }}</td>
             <td>{{ leave.leaveReason }}</td>
             <td>
-              <button id="leaveBtn" class="btn btn-primary">Edit</button>
-              <button id="leaveBtn" class="btn btn-danger">Delete</button>
+              <button id="leaveBtn" class="btn btn-primary" @click="editLeave" :value="leave.leaveID">Edit</button>
+              <button id="leaveBtn" class="btn btn-danger" @click="deleteLeave" :value="leave.leaveID">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -233,5 +240,14 @@ export default {
   border-radius: 25% 25% 0 0;
   color: black;
   font-weight: bold;
+}
+.leave{
+      background-color: rgb(27, 238, 69);
+}
+ .users{
+      background-color: rgb(27, 238, 69);
+}
+ .products{
+      background-color: rgb(27, 238, 69);
 }
 </style>

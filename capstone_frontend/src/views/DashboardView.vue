@@ -79,5 +79,12 @@ border: 1px solid black
 ul{
   list-style: none;
 }
+li{
+  background-color: #000000;
+  border-radius: 15%;
+  height: 30px;
+  align-self: center;
+  margin: auto;
+}
 
 </style>
