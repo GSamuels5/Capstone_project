@@ -31,13 +31,15 @@ export default {
     methods: {
         loginUser() {
             this.$store.dispatch("login", this.data);
-            // this.$router.push('employee')
+             
+
         }
     },
     mounted() {
         this.$store.dispatch("fetchEmployees");
     }
 }
+
 </script>
 
 <style scoped>

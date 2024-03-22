@@ -24,9 +24,11 @@ font-weight: bold;
  .nav-item{
     font: bold;
     color: black;
-    background-color: rgb(27, 238, 69);
-    border-radius: 25%;
  }
+ .nav-item:hover{
+text-decoration:  underline 6px rgb(13, 182, 64);
+ }
+
   nav {
     padding: 30px;
   }

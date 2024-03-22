@@ -36,8 +36,9 @@
         
         </ul>
         <form class="d-flex" role="search">
-          
+
           <button class="btn btn-outline-dark bg-primary-subtle w-100" type="submit"><b>Sign-up</b></button>
+          <button class="btn btn-outline-dark bg-primary-subtle w-100" @click="logOut"  ><b>Logout</b></button>
         </form>
       </div>
     </div>
@@ -45,7 +46,23 @@
   
 </template>
 
-<script></script>
+<script>
+import {useCookies} from "vue3-cookies"
+const {cookies} = useCookies()
+export default{
+  computed:{
+    loggedIn(){
+      return cookies.get('Worker') !== undefined
+    }
+  },
+  methods:{
+    logOut(){
+      cookies.remove('Worker')
+      this.$router.push('/')
+    }
+  }
+}
+</script>
 
 <style scoped>
 @media (300px >= width <= 900px){

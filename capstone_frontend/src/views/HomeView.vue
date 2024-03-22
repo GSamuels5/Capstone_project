@@ -34,6 +34,9 @@ export default {
 
       this.showLogin = true
       // show login component if clicked
+      // this.$router.push({
+      //   name: 'home'
+      // })
     }
   }
 }

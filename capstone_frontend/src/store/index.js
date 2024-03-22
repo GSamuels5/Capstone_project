@@ -3,7 +3,7 @@ import sweet from 'sweetalert'
 import {
   useCookies
 } from 'vue3-cookies'
-const cookies = useCookies()
+const { cookies} = useCookies()
 
 import router from '@/router/index.js'
 import AuthenticateUser from '@/service/AuthenticateUser'
@@ -12,7 +12,6 @@ const Urldata = 'https://capstone-project-1hsh.onrender.com'
 
 export default createStore({
   state: {
-
     workers: null,
     worker:null,
     pay: null,
@@ -175,6 +174,7 @@ export default createStore({
           
         })
         const{msg,token, result} = await response.json()
+        console.log(result);
         if (result) {
           context.commit("setWorker",{
             msg,
@@ -196,7 +196,7 @@ export default createStore({
             timer: 2000
           })
           router.push({
-            name: "login"
+            name: "employee"
           })
         }else{
           sweet({
@@ -207,6 +207,7 @@ export default createStore({
           })
         }  
       } catch (e) {
+        console.log(e)
         sweet({
           title: "Error",
           text: 'Failed to login.',
