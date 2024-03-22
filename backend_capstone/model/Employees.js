@@ -123,7 +123,7 @@ class Employees {
         } = req.body
         const qry = `
     select staffNo, firstName, surname,
-    empEmail,  empPwd, empAge, department, empRole
+    empEmail,  empPwd, empAge, department, empRole, empImg
     from Employees
     where empEmail = "${empEmail}";`
         db.query(qry, async(err, result) => {
