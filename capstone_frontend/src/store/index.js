@@ -7,6 +7,7 @@ const { cookies} = useCookies()
 
 import router from '@/router/index.js'
 import AuthenticateUser from '@/service/AuthenticateUser'
+// import { log } from 'console'
 
 const Urldata = 'https://capstone-project-1hsh.onrender.com'
 
@@ -22,44 +23,43 @@ export default createStore({
   getters: {
   },
   mutations: {
-    setWorkers(state,value){
-      state.workers = value
+    setWorkers(state, value) {
+      state.workers = value;
     }, 
-    setWorker(state,value){
-      state.worker = value
+    setWorker(state, value) {
+      state.worker = value;
     },
-     setPay(state,value){
-      state.pay = value
+    setPay(state, value) {
+      state.pay = value;
     },
-     setPaid(state,value){
-      state.paid = value
+    setPaid(state, value) {
+      state.paid = value;
     },
-    setDays(state,value){
-      state.days = value
+    setDays(state, value) {
+      state.days = value;
     },
-    setDay(state,value){
-      state.day = value
+    setDay(state, value) {
+      state.day = value;
     }
   },
+  
   actions: {
     async fetchEmployees(context){
       try {
-        let result = await fetch(`${Urldata}/workers`)
-        let data = await result.json()
+        let result = await fetch(`${Urldata}/workers`);
+        let data = await result.json();
         if (data) {
-          context.commit('setWorkers',data)
-          
+          context.commit('setWorkers', data);
         }
-        
       } catch (e) {
         sweet({
           title: 'Error',
-          text: 'An error occured when retrieving users.',
+          text: 'An error occurred when retrieving users.',
           icon: 'error',
           timer: 2000
-        })
+        });
       }
-    },
+    }, 
     async fetchEmployee(context, payload){
       try {
         let result = await fetch(`${Urldata}/workers/${payload.id}`)
@@ -141,7 +141,6 @@ export default createStore({
           body: JSON.stringify(payload)
         })
         let data = await result.json()
-        console.log(data);
         if(+data.status >= 400){
           sweet({
             title: "Error",

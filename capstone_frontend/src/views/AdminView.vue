@@ -14,7 +14,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
        <div class="modal-body">
-        <form @submit.prevent="addUser">
           <div class="mb-3">
             <label for="firstName" class="form-label">First name</label>
             <input type="text" class="form-control" id="firstName" required>
@@ -31,10 +30,10 @@
             <label for="firstName" class="form-label">Role</label>
             <ul class="dropdown-menu bg-dark">
               <li>
-<button value="admin" class="dropdown-item" @click="setRole">Admin</button>
+<button value="admin" class="dropdown-item" >Admin</button>
               </li>
               <li>
-<button  value="user" class="dropdown-item" @click="setRole">User</button>
+<button  value="user" class="dropdown-item" >User</button>
               </li>
             </ul>
             <label for="email" class="form-label">Email</label>
@@ -43,21 +42,20 @@
             <input type="password" class="form-control" id="password" required>
 
           </div>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button @click="userModalSubmit" class="btn btn-primary">Submit</button>
+        <button  class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>
 </div>
-    <div class="container users mb-5 p-3 shadow rounded-3 overflow-auto">
+    <div class="container  users mb-5 shadow rounded-3 overflow-auto ">
       <h4>Employees</h4>
-      <table class="table">
+      <table class="table text-black">
         <thead>
           <tr>
-            <th scope="col">staffNo</th>
             <th scope="col">Name</th>
             <th scope="col">Surname</th>
             <th scope="col">Department</th>
@@ -70,23 +68,25 @@
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody v-if="workers">
-          <tr v-for="user in workers" :key="user.staffNo">
-            <td>{{ user.staffNo }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.surname }}</td>
-            <td>{{ user.empPwddepartment }}</td>
-            <td>{{ user.empAge }}</td>
-            <td><a :href="user.empImg">{{ user.empImg }}</a></td>
-            <td>{{ user.empRole }}</td>
-            <td>{{ user.empEmail }}</td>
+        <tbody v-if="Users">
+          <!-- <tr v-for="user in Users" :key="user.staffNo">
+            <td>{{user.firstName}}</td>
+          </tr> -->
+          <tr v-for="user in Users" :key="user.staffNo">
+    <td>{{ user.firstName }}</td>
+    <td>{{ user.surname }}</td>
+    <td>{{ user.department }}</td>
+    <td>{{ user.empAge }}</td>
+    <td><img :src="user.empImg" class="img-fluid w-25 h-25"></td>
+    <td>{{ user.EmpRole }}</td>
+    <td>{{ user.empEmail }}</td>
+    <td class="d-flex">
+       <button class="btn btn-primary" data-bs-target="#exampleModal" data-bs-toggle="modal" @click="editUser" :value="user.staffNo">Edit</button>
+      <button class="btn btn-danger" @click="deleteUser" :value="user.staffNo">Delete</button>
+  </td>
+</tr> 
+</tbody>
 
-            <td class="d-flex">
-              <button class="btn btn-primary" data-bs-target="#exampleModal" data-bs-toggle="modal" @click="editUser" :value="user.staffNo">Edit</button>
-              <button class="btn btn-danger" @click="deleteUser" :value="user.staffNo">Delete</button>
-            </td>
-          </tr>
-        </tbody>
       </table>
     </div>
 
@@ -129,17 +129,13 @@
         <thead>
           <tr>
             <th scope="col">staffNo</th>
-            <th scope="col">SalaryID</th>
             <th scope="col">Amount</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody v-if="Salary">
           <tr v-for="money in pay" :key="money.salaryID">
-            <td>
-              {{ money.salaryID }}
-            </td>
-            <td>{{ money.staffNo }}</td>
+            <td>{{ money.staffNo }}{{money}}</td>
             <td>R {{ money.amount }}</td>
             <td class="d-flex">
               <button class="btn btn-primary" data-bs-target="exampleModal1" data-bs-toggle="modal" @click="editSalary" :value="money.salaryID">Edit</button>
@@ -190,7 +186,6 @@
         <thead>
           <tr>
             <th scope="col">staffNo</th>
-            <th scope="col">LeaveID</th>
             <th scope="col">Date</th>
             <th scope="col">Reason</th>
             <th scope="col">Action</th>
@@ -198,10 +193,9 @@
         </thead>
         <tbody v-if="leaveDays">
           <tr v-for="leave in days" :key="leave.LeaveID">
-            <td>{{ leave.LeaveID }}</td>
             <td>{{ leave.staffNo }}</td>
             <td>{{ leave.leavedays }}</td>
-            <td>{{ leave.leaveReason }}</td>
+            <td>{{ leave.leaveReason }}{{leave}}</td>
             <td>
               <button id="leaveBtn" class="btn btn-primary" @click="editLeave" :value="leave.leaveID">Edit</button>
               <button id="leaveBtn" class="btn btn-danger" @click="deleteLeave" :value="leave.leaveID">Delete</button>
@@ -216,14 +210,14 @@
 <script>
 export default {
   computed: {
-    workers() {
-      return this.$store.state.workers;
+  Users() {
+      return this.$store.state.workers?.result;
     },
     Salary() {
-      return this.$store.state.pay;
+      return this.$store.state.pay?.result;
     },
     leaveDays() {
-      return this.$store.state.days;
+      return this.$store.state.days?.result;
     },
   },
   mounted() {
